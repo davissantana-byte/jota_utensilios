@@ -44,5 +44,11 @@ def exibir_produto(id):
     return render_template('produtos.html', p=produto)
 
 
+@app.route('/carrinho')
+def exibir_carrinho():
+    return render_template('carrinho.html')
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
