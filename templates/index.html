@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jota - Utensílios e Ferramentas</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Jota - Utensílios e Ferramentas</h1>
+      <div class="icone-carrinho">
+        <a href="carrinho.html" class="link-carrinho"
+          ><img
+            src="/static/img/icons/carrinho-de-compras.svg"
+            alt="Carrinho de Compras"
+        /></a>
+        <span id="contador-carrinho">0</span>
+      </div>
+    </header>
+
+    <main>
+      <div>
+        <aside class="contato">
+          <h2>ENTRE EM CONTATO</h2>
+          <section class="sub-contato">
+            <div>
+              <img src="../static/img/icons/telefone.svg" alt="Telefone" />
+              <p>(11) 97059-5785</p>
+            </div>
+            <div>
+              <img src="../static/img/icons/localizacao.svg" alt="Localização" />
+              <p>joaopsouza104@gmail.com</p>
+            </div>
+          </section>
+        </aside>
+
+        <aside class="entrega">
+          <h2>OPÇÕES DE ENTREGA</h2>
+          <section>
+            <details>
+              <summary>Entrega</summary>
+              <p>Entrega somente Correios e regiões São Paulo - Capital</p>
+            </details>
+
+            <hr />
+
+            <details>
+              <summary>Retirada</summary>
+              <p>Retirada no local com agendamento prévio</p>
+            </details>
+          </section>
+        </aside>
+
+        <aside class="categoria">
+          <h2>CATEGORIAS</h2>
+          <ul>
+            <li>INICIO</li>
+            <li>CONTROLE</li>
+            <li>TRAVA DE SEGURANÇA</li>
+            <li>CADEADO</li>
+            <li>ELETRÔNICOS</li>
+            <li>FITA</li>
+            <li>FERRAMENTAS</li>
+            <li>CABOS</li>
+            <li>FONTES</li>
+            <li>ADAPTADOR DE TOMADA</li>
+            <li>AUTOMOTIVO</li>
+            <li>FONTE</li>
+            <li>ANTENA</li>
+            <li>EXTENSÃO</li>
+            <li>OUTROS</li>
+          </ul>
+        </aside>
+      </div>
+      <div>
+        <section class="carrossel-container">
+          <img src="../static/img/icons/lupa-pesquisa.svg" alt="" />
+          <button class="seta-anterior" onclick="navegarCarrossel(-1)">
+            <img src="../static/img/icons/voltar.svg" alt="" />
+          </button>
+          <ul>
+            <div class="janela-carrossel">
+              <div class="lista-produtos">
+                <div class="card-produto">
+                  <li>INICIO</li>
+                </div>
+                <div class="card-produto">
+                  <li>CONTROLE</li>
+                </div>
+                <div class="card-produto">
+                  <li>TRAVA DE SEGURANÇA</li>
+                </div>
+                <div class="card-produto">
+                  <li>CADEADO</li>
+                </div>
+                <div class="card-produto">
+                  <li>ELETRÔNICOS</li>
+                </div>
+                <div class="card-produto">
+                  <li>FITA</li>
+                </div>
+                <div class="card-produto">
+                  <li>FERRAMENTAS</li>
+                </div>
+                <div class="card-produto">
+                  <li>CABOS</li>
+                </div>
+                <div class="card-produto">
+                  <li>FONTES</li>
+                </div>
+                <div class="card-produto">
+                  <li>ADAPTADOR DE TOMADA</li>
+                </div>
+                <div class="card-produto">
+                  <li>AUTOMOTIVO</li>
+                </div>
+                <div class="card-produto">
+                  <li>FONTE</li>
+                </div>
+                <div class="card-produto">
+                  <li>ANTENA</li>
+                </div>
+                <div class="card-produto">
+                  <li>EXTENSÃO</li>
+                </div>
+                <div class="card-produto">
+                  <li>OUTROS</li>
+                </div>
+              </div>
+            </div>
+          </ul>
+          <button class="seta-proxima" onclick="navegarCarrossel(1)">
+            <img src="../static/img/icons/avancar.svg" alt="" />
+          </button>
+        </section>
+
+        <section class="produtos">
+          <h2>Trava de Segurança</h2>
+          <div class="sub-trava-seguranca">
+            {% for p in produtos %}
+            {% if p.categoria == 'Trava de Segurança' %}
+            <a href="/exibir_produto/{{p.id}}">
+              <div>
+                <img src="/static/img/produtos/trava-seguranca/{{p.id}}.jpg" alt="" />
+                <div class="sub-trava-1">
+                  <p>{{p.nome}}</p>
+                  <p><b>R$ {{p.preco}}</b></p>
+                </div>
+              </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+          <h2>Cadeado</h2>
+          <div class="sub-trava-seguranca">
+            {% for p in produtos %}
+            {% if p.categoria == 'Cadeado' %}
+            <a href="/exibir_produto/{{p.id}}">
+              <div>
+                <img src="/static/img/produtos/cadeado/{{p.id}}.jpg" alt="" />
+                <div class="sub-trava-1">
+                  <p>{{p.nome}}</p>
+                  <p><b>R$ {{p.preco}}</b></p>
+                </div>
+              </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+          <h2>Fita</h2>
+          <div class="sub-trava-seguranca">
+            {% for p in produtos %}
+            {% if p.categoria == 'Fita' %}
+            <a href="/exibir_produto/{{p.id}}">
+              <div>
+                <img src="/static/img/produtos/fitas/{{p.id}}.jpg" alt="" />
+                <div class="sub-trava-1">
+                  <p>{{p.nome}}</p>
+                  <p><b>R$ {{p.preco}}</b></p>
+                </div>
+              </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+          <h2>Eletrônicos</h2>
+          <div class="sub-trava-seguranca">
+            {% for p in produtos %}
+            {% if p.categoria == 'Eletrônicos' %}
+            <a href="/exibir_produto/{{p.id}}">
+              <div>
+                <img src="/static/img/produtos/eletronicos/{{p.id}}.jpg" alt="" />
+                <div class="sub-trava-1">
+                  <p>{{p.nome}}</p>
+                  <p><b>R$ {{p.preco}}</b></p>
+                </div>
+              </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+
+          <h2>Ferramentas</h2>
+          <div class="sub-trava-seguranca">
+            {% for p in produtos %}
+            {% if p.categoria == 'Ferramentas' %}
+            <a href="/exibir_produto/{{p.id}}">
+              <div>
+                <img src="/static/img/produtos/ferramentas/{{p.id}}.jpg" alt="" />
+                <div class="sub-trava-1">
+                  <p>{{p.nome}}</p>
+                  <p><b>R$ {{p.preco}}</b></p>
+                </div>
+              </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+          <h2>Cabos</h2>
+          <div class="sub-trava-seguranca">
+            {% for p in produtos %}
+            {% if p.categoria == 'Cabos' %}
+            <a href="/exibir_produto/{{p.id}}">
+              <div>
+                <img src="/static/img/produtos/cabos/{{p.id}}.jpg" alt="" />
+                <div class="sub-trava-1">
+                  <p>{{p.nome}}</p>
+                  <p><b>R$ {{p.preco}}</b></p>
+                </div>
+              </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+          <h2>Fontes</h2>
+          <div class="sub-trava-seguranca">
+            {% for p in produtos %}
+            {% if p.categoria == 'Fontes' %}
+            <a href="/exibir_produto/{{p.id}}">
+              <div>
+                <img src="/static/img/produtos/fontes/{{p.id}}.jpg" alt="" />
+                <div class="sub-trava-1">
+                  <p>{{p.nome}}</p>
+                  <p><b>R$ {{p.preco}}</b></p>
+                </div>
+              </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+          <h2>Adaptador de tomada</h2>
+          <div class="sub-trava-seguranca">
+            {% for p in produtos %}
+            {% if p.categoria == 'Adaptador de tomada' %}
+            <a href="/exibir_produto/{{p.id}}">
+              <div>
+                <img src="/static/img/produtos/adaptador-tomadas/{{p.id}}.jpg" alt="" />
+                <div class="sub-trava-1">
+                  <p>{{p.nome}}</p>
+                  <p><b>R$ {{p.preco}}</b></p>
+                </div>
+              </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+          <h2>Automotivo</h2>
+          <div class="sub-trava-seguranca">
+            {% for p in produtos %}
+            {% if p.categoria == 'Automotivo' %}
+            <a href="/exibir_produto/{{p.id}}">
+              <div>
+                <img src="/static/img/produtos/automotivo/{{p.id}}.jpg" alt="" />
+                <div class="sub-trava-1">
+                  <p>
+                    {{p.nome}}
+                  </p>
+                  <p><b>R$ {{p.preco}}</b></p>
+                </div>
+              </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+          <h2>Antenas</h2>
+          <div class="sub-trava-seguranca">
+            {% for p in produtos %}
+            {% if p.categoria == 'Antenas' %}
+            <a href="/exibir_produto/{{p.id}}">
+              <div>
+                <img src="/static/img/produtos/antenas/{{p.id}}.jpg" alt="" />
+                <div class="sub-trava-1">
+                  <p>{{p.nome}}</p>
+                  <p><b>R$ {{p.preco}}</b></p>
+                </div>
+              </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+          <h2>Extensões</h2>
+          <div class="sub-trava-seguranca">
+            {% for p in produtos %}
+            {% if p.categoria == 'Extensões' %}
+            <a href="/exibir_produto/{{p.id}}">
+              <div>
+                <img src="/static/img/produtos/extensoes/{{p.id}}.jpg" alt="" />
+                <div class="sub-trava-1">
+                  <p>{{p.nome}}</p>
+                  <p><b>R$ {{p.preco}}</b></p>
+                </div>
+              </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+          <h2>Controles</h2>
+          <div class="sub-trava-seguranca">
+            {% for p in produtos %}
+            {% if p.categoria == 'Controles' %}
+            <a href="/exibir_produto/{{p.id}}">
+              <div>
+                <img src="/static/img/produtos/controles/{{p.id}}.jpg" alt="" />
+                <div class="sub-trava-1">
+                  <p>{{p.nome}}</p>
+                  <p><b>R$ {{p.preco}}</b></p>
+                </div>
+              </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="/static/main.js"></script>
+
+  </body>
+</html>
+
+
+
+
+

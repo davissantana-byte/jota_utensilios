@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jota - Utensílios e Ferramentas</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1><a href="/index.html">Jota - Utensílios e Ferramentas</a></h1>
+      <div class="icone-carrinho">
+        <a href="/carrinho.html"
+          ><img
+            src="/static/img/icons/carrinho-de-compras.svg"
+            alt="Carrinho de Compras"
+        /></a>
+        <span id="contador-carrinho">0</span>
+      </div>
+    </header>
+
+    <main>
+      <div>
+        <aside class="contato">
+          <h2>ENTRE EM CONTATO</h2>
+          <section class="sub-contato">
+            <div>
+              <img src="/static/img/icons/telefone.svg" alt="Telefone" />
+              <p>(11) 98765-4321</p>
+            </div>
+            <div>
+              <img src="/static/img/icons/localizacao.svg" alt="Localização" />
+              <p>Rua Comendador Afonso Kherlaklan, 79 - 12° Andar - Sala 125</p>
+            </div>
+          </section>
+        </aside>
+
+        <aside class="entrega">
+          <h2>OPÇÕES DE ENTREGA</h2>
+          <section>
+            <details>
+              <summary>Entrega</summary>
+              <p>
+                Entrega somente SEDEX, PAC, Transportadora e regiões próximas a
+                25 de Março
+              </p>
+            </details>
+
+            <hr />
+
+            <details>
+              <summary>Retirada</summary>
+              <p>Retirada no local com agendamento prévio</p>
+            </details>
+          </section>
+        </aside>
+
+        <aside class="categoria">
+          <h2>CATEGORIAS</h2>
+          <ul>
+            <li><a href="/index.html">INICIO</a></li>
+            <li>CONTROLE</li>
+            <li>TRAVA DE SEGURANÇA</li>
+            <li>CADEADO</li>
+            <li>ELETRÔNICOS</li>
+            <li>FITA</li>
+            <li>FERRAMENTAS</li>
+            <li>CABOS</li>
+            <li>FONTES</li>
+            <li>ADAPTADOR DE TOMADA</li>
+            <li>AUTOMOTIVO</li>
+            <li>FONTE</li>
+            <li>ANTENA</li>
+            <li>EXTENSÃO</li>
+            <li>OUTROS</li>
+          </ul>
+        </aside>
+      </div>
+      <div>
+        <section class="carrossel-container">
+          <img src="/static/img/icons/lupa-pesquisa.svg" alt="" />
+          <button class="seta-anterior" onclick="navegarCarrossel(-1)">
+            <img src="/static/img/icons/voltar.svg" alt="" />
+          </button>
+          <ul>
+            <div class="janela-carrossel">
+              <div class="lista-produtos">
+                <div class="card-produto">
+                  <li><a href="/index.html">INICIO</a></li>
+                </div>
+                <div class="card-produto">
+                  <li>CONTROLE</li>
+                </div>
+                <div class="card-produto">
+                  <li>TRAVA DE SEGURANÇA</li>
+                </div>
+                <div class="card-produto"><li>CADEADO</li></div>
+                <div class="card-produto">
+                  <li>ELETRÔNICOS</li>
+                </div>
+                <div class="card-produto">
+                  <li>FITA</li>
+                </div>
+                <div class="card-produto">
+                  <li>FERRAMENTAS</li>
+                </div>
+                <div class="card-produto">
+                  <li>CABOS</li>
+                </div>
+                <div class="card-produto">
+                  <li>FONTES</li>
+                </div>
+                <div class="card-produto">
+                  <li>ADAPTADOR DE TOMADA</li>
+                </div>
+                <div class="card-produto">
+                  <li>AUTOMOTIVO</li>
+                </div>
+                <div class="card-produto">
+                  <li>FONTE</li>
+                </div>
+                <div class="card-produto">
+                  <li>ANTENA</li>
+                </div>
+                <div class="card-produto">
+                  <li>EXTENSÃO</li>
+                </div>
+                <div class="card-produto">
+                  <li>OUTROS</li>
+                </div>
+              </div>
+            </div>
+          </ul>
+          <button class="seta-proxima" onclick="navegarCarrossel(1)">
+            <img src="/static/img/icons/avancar.svg" alt="" />
+          </button>
+        </section>
+
+        <section class="produtos1">
+          <div class="sub-trava-seguranca1">
+            {% if p.categoria == "Trava de Segurança" %}
+            <img id="imagem-principal" src="/static/img/produtos/trava-seguranca/{{p.id}}.jpg" alt="{{p.nome}}" />
+            {% elif p.categoria == "Cadeado" %}
+            <img id="imagem-principal" src="/static/img/produtos/cadeado/{{p.id}}.jpg" alt="{{p.nome}}" />
+            {% elif p.categoria == "Fita" %}
+            <img id="imagem-principal" src="/static/img/produtos/fitas/{{p.id}}.jpg" alt="{{p.nome}}" /> 
+            {% elif p.categoria == "Ferramentas" %}
+            <img id="imagem-principal" src="/static/img/produtos/ferramentas/{{p.id}}.jpg" alt="{{p.nome}}" />
+            {% elif p.categoria == "Cabos" %}
+            <img id="imagem-principal" src="/static/img/produtos/cabos/{{p.id}}.jpg" alt="{{p.nome}}" />
+            {% elif p.categoria == "Fontes" %}
+            <img id="imagem-principal" src="/static/img/produtos/fontes/{{p.id}}.jpg" alt="{{p.nome}}" />
+            {% elif p.categoria == "Adaptador de tomada" %}
+            <img id="imagem-principal" src="/static/img/produtos/adaptador-tomadas/{{p.id}}.jpg" alt="{{p.nome}}" />
+            {% elif p.categoria == "Automotivo" %} 
+            <img id="imagem-principal" src="/static/img/produtos/automotivo/{{p.id}}.jpg" alt="{{p.nome}}" />
+            {% elif p.categoria == "Fonte" %}
+            <img id="imagem-principal" src="/static/img/produtos/fonte/{{p.id}}.jpg" alt="{{p.nome}}" />
+            {% elif p.categoria == "Antena" %}
+            <img id="imagem-principal" src="/static/img/produtos/antena/{{p.id}}.jpg" alt="{{p.nome}}" />
+            {% elif p.categoria == "Extensões" %}
+            <img id="imagem-principal" src="/static/img/produtos/extensoes/{{p.id}}.jpg" alt="{{p.nome}}" />
+            {% elif p.categoria == "Eletrônicos" %}
+            <img id="imagem-principal" src="/static/img/produtos/eletronicos/{{p.id}}.jpg" alt="{{p.nome}}" />
+            {% else %}
+            <img id="imagem-principal" src="/static/img/produtos/{{p.categoria|lower}}/{{p.id}}.jpg" alt="{{p.nome}}" />
+            {% endif %}
+
+            <div class="informacoes">
+              <h2 id="titulo-principal">{{p.nome}}</h2>
+              <p class="preco-display" id="preco-produto">R$ {{p.preco}}</p>
+            </div>
+
+            <div class="pagamento">
+              <div class="quantidade">
+                <p>Estoque disponível</p>
+                <br />
+                <datalist id="quantidade">
+                  <option value="1 unidade"></option>
+                  <option value="2 unidades"></option>
+                  <option value="3 unidades"></option>
+                  <option value="4 unidades"></option>
+                  <option value="5 unidades"></option>
+                  <option value="6 unidades"></option>
+                </datalist>
+                <label for="quantidade">Quantidade: </label>
+                <input
+                  list="quantidade"
+                  id="quantidade-produto"
+                  name="quantidade-produto"
+                  value="1 unidade"
+                />
+                <br /><br />
+              </div>
+              <button class="botao-carrinho" onclick="adicionarAoCarrinho('{{ p.id }}', '{{ p.nome }}', '{{ p.preco }}')">Adicionar ao carrinho</button>
+              <a href="https://wa.me/5511977245250?text=Olá!%20Tenho%20interesse%20no%20produto:%20{{ p.nome }}%20(R$%20{{ p.preco }})" target="_blank" class="botao-comprar-agora">Comprar agora</a>
+            </div>
+          </div>
+
+          <hr />
+          <br />
+
+          <div class="descricao-relacionados">
+            <h2>Descrição do Produto</h2>
+            <p id="descricao-produto">{{ p.descricao}}</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="/static/main.js"></script>
+  </body>
+</html>
+
+
