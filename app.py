@@ -33,8 +33,8 @@ def exibir_produto(id):
     conexao = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='AmoebaJavaScript2025!',
-        database='loja_jota'
+        password='020607',
+        database='jota_utensilios'
     )
     cursor = conexao.cursor(dictionary=True)
     cursor.execute("SELECT id, nome, preco, categoria, descricao FROM produtos WHERE id = %s", (id,))
