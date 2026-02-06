@@ -5,8 +5,9 @@ try:
     conexao = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='AmoebaJavaScript2025!',
-        database='loja_jota'
+        password='020607',
+        database='jota_utensilios',
+        port=3306
     )
 
     cursor = conexao.cursor()

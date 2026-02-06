@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -25,11 +28,11 @@
           <h2>ENTRE EM CONTATO</h2>
           <section class="sub-contato">
             <div>
-              <img src="../static/img/icons/telefone.svg" alt="Telefone" />
+              <img src="/static/img/icons/telefone.svg" alt="Telefone" />
               <p>(11) 97059-5785</p>
             </div>
             <div>
-              <img src="../static/img/icons/localizacao.svg" alt="Localização" />
+              <img src="/static/img/icons/localizacao.svg" alt="Localização" />
               <p>joaopsouza104@gmail.com</p>
             </div>
           </section>
@@ -75,9 +78,9 @@
       </div>
       <div>
         <section class="carrossel-container">
-          <img src="../static/img/icons/lupa-pesquisa.svg" alt="" />
+          <img src="/static/img/icons/lupa-pesquisa.svg" alt="" />
           <button class="seta-anterior" onclick="navegarCarrossel(-1)">
-            <img src="../static/img/icons/voltar.svg" alt="" />
+            <img src="/static/img/icons/voltar.svg" alt="" />
           </button>
           <ul>
             <div class="janela-carrossel">
@@ -131,7 +134,7 @@
             </div>
           </ul>
           <button class="seta-proxima" onclick="navegarCarrossel(1)">
-            <img src="../static/img/icons/avancar.svg" alt="" />
+            <img src="/static/img/icons/avancar.svg" alt="" />
           </button>
         </section>
 
@@ -312,7 +315,7 @@
           <h2>Extensões</h2>
           <div class="sub-trava-seguranca">
             {% for p in produtos %}
-            {% if p.categoria == 'Extensões' %}
+            {% if p.categoria == 'Extensoes' %}
             <a href="/exibir_produto/{{p.id}}">
               <div>
                 <img src="/static/img/produtos/extensoes/{{p.id}}.jpg" alt="" />
@@ -345,11 +348,10 @@
         </section>
       </div>
     </main>
-
     <script src="/static/main.js"></script>
-
   </body>
 </html>
+
 
 
 
