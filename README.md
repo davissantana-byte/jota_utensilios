@@ -13,22 +13,22 @@ O **Jota Utensílios** é uma aplicação web Fullstack que simula o ambiente de
 
 ### 🚀 Funcionalidades Principais
 
-* **Catálogo Dinâmico:** Os produtos (Nome, Preço, Imagem, Categoria) são puxados diretamente do banco de dados MySQL.
-* **Filtragem por Categoria:** Lógica no Backend/Template para exibir produtos específicos (Ferramentas, Cadeados, Elétrica, etc.).
+* **Catálogo Dinâmico:** Os produtos (Nome, Preço, Imagem, Categoria) são puxados diretamente do banco de dados MySQL em tempo real.
+* **Filtragem por Categoria:** Lógica no Backend para organizar produtos (Ferramentas, Cadeados, Elétrica, etc.).
 * **Página de Detalhes:** Rota dinâmica (`/exibir_produto/<id>`) que carrega as informações exclusivas de cada item.
-* **Carrinho de Compras:** Gerenciamento de itens selecionados pelo usuário.
-* **Conexão Robusta:** Utilização do driver `PyMySQL` para garantir estabilidade na conexão com o banco de dados.
+* **Carrinho de Compras:** Interface para visualização de itens selecionados.
+* **Conexão Robusta:** Utilização do driver `PyMySQL` para alta estabilidade na conexão com o banco de dados.
 
 ## 🛠️ Tecnologias Utilizadas
 
 * **Back-end:** Python, Flask (Framework Web).
-* **Banco de Dados:** MySQL (Server), PyMySQL (Driver de conexão).
-* **Front-end:** HTML5, CSS3, JavaScript (Manipulação do DOM e Carrinho).
+* **Banco de Dados:** MySQL (Server), PyMySQL (Driver).
+* **Front-end:** HTML5, CSS3, JavaScript.
 * **Ferramentas:** VS Code, MySQL Workbench, Git.
 
 ## 🗄️ Estrutura do Banco de Dados
 
-O projeto utiliza um banco chamado `jota_utensilios` com a seguinte estrutura principal:
+O projeto utiliza um banco chamado `jota_utensilios`. O script SQL principal para a tabela de produtos é:
 
 ```sql
 CREATE TABLE produtos (
@@ -38,3 +38,45 @@ CREATE TABLE produtos (
     categoria VARCHAR(50),
     descricao TEXT
 );
+```
+
+## ⚙️ Como Rodar o Projeto
+
+### Pré-requisitos
+* Python instalado.
+* MySQL Server rodando (Porta 3306).
+
+### Passo a Passo
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/SEU-USUARIO/jota-utensilios.git](https://github.com/SEU-USUARIO/jota-utensilios.git)
+    cd jota-utensilios
+    ```
+
+2.  **Instale as dependências:**
+    ```bash
+    pip install flask pymysql
+    ```
+
+3.  **Configure o Banco de Dados:**
+    * Crie um banco chamado `jota_utensilios` no seu MySQL.
+    * Rode o script SQL para criar a tabela `produtos`.
+    * No arquivo `app.py`, ajuste a senha do banco se necessário.
+
+4.  **Execute a aplicação:**
+    ```bash
+    python app.py
+    ```
+
+5.  **Acesse:**
+    Abra o navegador em `http://127.0.0.1:5000`
+
+## ✒️ Autor
+
+**Davi Santana**
+* [LinkedIn](https://www.linkedin.com/in/davi-santana/)
+* [GitHub](https://github.com/SEU-USUARIO)
+
+---
+*Desenvolvido com foco em lógica de programação e integração de sistemas.*
