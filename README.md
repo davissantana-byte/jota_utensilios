@@ -75,8 +75,8 @@ CREATE TABLE produtos (
 ## ✒️ Autor
 
 **Davi Santana**
-* [LinkedIn](https://www.linkedin.com/in/davi-santana/)
-* [GitHub](https://github.com/SEU-USUARIO)
+* [LinkedIn](https://www.linkedin.com/in/davi-santana-byte/)
+* [GitHub](https://github.com/davissantana-byte)
 
 ---
 *Desenvolvido com foco em lógica de programação e integração de sistemas.*
