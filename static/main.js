@@ -60,34 +60,38 @@ function renderizarCarrinho() {
     const container = document.getElementById('lista-carrinho');
     const totalElement = document.getElementById('valor-total');
     
-    // Se não estiver na página de carrinho, nem tenta rodar
     if (!container) return;
 
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     
     if (carrinho.length === 0) {
-        container.innerHTML = "<p>Seu carrinho está vazio.</p>";
-        if(totalElement) totalElement.innerText = "0,00";
+        container.innerHTML = `<div class="carrinho-vazio"><p>Seu carrinho está vazio.</p></div>`;
+        if(totalElement) totalElement.innerText = "R$ 0,00";
         return;
     }
 
     let total = 0;
     container.innerHTML = carrinho.map((item, index) => {
-        // Garante que o preço seja tratado como string antes do replace
         let precoLimpo = String(item.preco).replace(',', '.');
         const subtotal = parseFloat(precoLimpo) * item.quantidade;
         total += subtotal;
         
+        // AQUI MUDOU: Usamos classes em vez de style=""
         return `
-            <div class="item-carrinho" style="border-bottom: 1px solid #ccc; margin-bottom: 10px; padding: 10px;">
-                <p><strong>${item.nome}</strong></p>
-                <p>Qtd: ${item.quantidade} - Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}</p>
-                <button onclick="removerItem(${index})" style="color: red;">Remover</button>
+            <div class="item-carrinho">
+                <div class="detalhes-item">
+                    <h3>${item.nome}</h3>
+                    <p class="qtd-preco">
+                        <span>Qtd: ${item.quantidade}</span>
+                        <span>Total: R$ ${subtotal.toFixed(2).replace('.', ',')}</span>
+                    </p>
+                </div>
+                <button class="btn-remover" onclick="removerItem(${index})">Remover</button>
             </div>
         `;
     }).join('');
 
-    if(totalElement) totalElement.innerText = total.toFixed(2).replace('.', ',');
+    if(totalElement) totalElement.innerText = "R$ " + total.toFixed(2).replace('.', ',');
 }
 
 
@@ -152,6 +156,34 @@ function carregarDados() {
     if (document.getElementById('lista-carrinho')) {
         renderizarCarrinho();
     }
+}
+
+function finalizarCompra() {
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    
+    if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
+    }
+
+    let mensagem = "Olá! Gostaria de finalizar meu pedido no Jota Utensílios:\n\n";
+    let total = 0;
+
+    carrinho.forEach(item => {
+        let precoLimpo = String(item.preco).replace(',', '.');
+        let subtotal = parseFloat(precoLimpo) * item.quantidade;
+        total += subtotal;
+        
+        mensagem += `📦 *${item.quantidade}x ${item.nome}*\n   (Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')})\n`;
+    });
+
+    mensagem += `\n💰 *Valor Total: R$ ${total.toFixed(2).replace('.', ',')}*`;
+    
+    // Substitua pelo SEU número (DD + NÚMERO) sem espaços ou traços
+    let numeroWhatsApp = "5511970595785"; 
+    
+    let url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+    window.open(url, '_blank');
 }
 
 // Executa sempre que a página carregar ou recarregar

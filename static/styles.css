@@ -471,6 +471,168 @@ button {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- ESTILOS DO CARRINHO (Atualizado) --- */
+
+.container-carrinho {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.container-carrinho h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #fbd700; /* Amarelo da Jota */
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Item Individual */
+.item-carrinho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+
+.item-carrinho:hover {
+    background-color: #f9f9f9;
+}
+
+.detalhes-item h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+    color: #222;
+}
+
+.qtd-preco {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.qtd-preco span {
+    margin-right: 15px;
+}
+
+/* Botão Remover */
+.btn-remover {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.btn-remover:hover {
+    background-color: #d93636;
+}
+
+/* Área de Resumo (Total e Botão Whats) */
+.resumo {
+    margin-top: 30px;
+    text-align: right;
+    padding-top: 20px;
+    border-top: 2px solid #eee;
+}
+
+.resumo p {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.resumo button {
+    background-color: #25D366; /* Verde WhatsApp */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.resumo button:hover {
+    background-color: #128C7E;
+    transform: scale(1.05);
+}
+
+.carrinho-vazio {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+    font-size: 1.2rem;
+}
+
+/* Responsivo para celular */
+@media (max-width: 600px) {
+    .item-carrinho {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .btn-remover {
+        width: 100%;
+    }
+
+    .resumo {
+        text-align: center;
+    }
+    
+    .resumo button {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .botao-comprar-agora {
     display: inline-block;
     background-color: #25d366; /* Verde do WhatsApp */
