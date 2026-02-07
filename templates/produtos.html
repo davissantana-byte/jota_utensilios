@@ -175,24 +175,11 @@
               <div class="quantidade">
                 <p>Estoque disponível</p>
                 <br />
-                <datalist id="quantidade">
-                  <option value="1 unidade"></option>
-                  <option value="2 unidades"></option>
-                  <option value="3 unidades"></option>
-                  <option value="4 unidades"></option>
-                  <option value="5 unidades"></option>
-                  <option value="6 unidades"></option>
-                </datalist>
                 <label for="quantidade">Quantidade: </label>
-                <input
-                  list="quantidade"
-                  id="quantidade-produto"
-                  name="quantidade-produto"
-                  value="1 unidade"
-                />
+                <input type="number" id="quantidade-produto" min="1" value="1"/>
                 <br /><br />
               </div>
-              <button class="botao-carrinho" onclick="adicionarAoCarrinho('{{ p.id }}', '{{ p.nome }}', '{{ p.preco }}')">Adicionar ao carrinho</button>
+              <button class="botao-carrinho" onclick="adicionarComQuantidade('{{ p.id }}', '{{ p.nome }}', '{{ p.preco }}')">Adicionar ao carrinho</button>
               <a href="https://wa.me/5511977245250?text=Olá!%20Tenho%20interesse%20no%20produto:%20{{ p.nome }}%20(R$%20{{ p.preco }})" target="_blank" class="botao-comprar-agora">Comprar agora</a>
             </div>
           </div>

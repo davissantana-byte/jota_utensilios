@@ -1,166 +1,159 @@
-let indiceAtual = 0; 
-const lista = document.querySelector('.lista-produtos');
-const itens = document.querySelectorAll('.lista-produtos .card-produto'); 
-const totalItens = itens.length; 
+// --- 1. CONFIGURAÇÕES GLOBAIS ---
+let indiceAtual = 0;
+const itensPorPagina = 6;
 
-const itensPorPagina = 6; 
-
-const maxIndice = Math.ceil(totalItens / itensPorPagina) - 1; 
-
-
+// --- 2. FUNÇÕES DO CARROSSEL ---
 function atualizarVisibilidadeSetas() {
     const setaAnterior = document.querySelector('.seta-anterior');
     const setaProxima = document.querySelector('.seta-proxima');
-    
-    if (indiceAtual === 0) {
-        setaAnterior.style.visibility = 'hidden'; 
-        setaAnterior.style.opacity = '0'; 
-    } else {
-        setaAnterior.style.visibility = 'visible'; 
-        setaAnterior.style.opacity = '1';
-    }
+    const itens = document.querySelectorAll('.lista-produtos .card-produto');
+    const totalItens = itens.length;
+    const maxIndice = Math.ceil(totalItens / itensPorPagina) - 1;
 
-    if (indiceAtual === maxIndice) {
-        setaProxima.style.visibility = 'hidden';
-        setaProxima.style.opacity = '0';
-    } else {
-        setaProxima.style.visibility = 'visible'; 
-        setaProxima.style.opacity = '1';
-    }
+    if (!setaAnterior || !setaProxima) return;
+
+    setaAnterior.style.visibility = (indiceAtual === 0) ? 'hidden' : 'visible';
+    setaAnterior.style.opacity = (indiceAtual === 0) ? '0' : '1';
+
+    setaProxima.style.visibility = (indiceAtual === maxIndice) ? 'hidden' : 'visible';
+    setaProxima.style.opacity = (indiceAtual === maxIndice) ? '0' : '1';
 }
 
 function navegarCarrossel(direcao) {
-    
+    const lista = document.querySelector('.lista-produtos');
+    const itens = document.querySelectorAll('.lista-produtos .card-produto');
+    const maxIndice = Math.ceil(itens.length / itensPorPagina) - 1;
+
     let novoIndice = indiceAtual + direcao;
+    if (novoIndice < 0) novoIndice = 0;
+    if (novoIndice > maxIndice) novoIndice = maxIndice;
 
-    if (novoIndice < 0) {
-        novoIndice = 0; 
-    } 
-    
-    else if (novoIndice > maxIndice) {
-        novoIndice = maxIndice; 
-    }
-    
-    if (novoIndice === indiceAtual) {
-        return; 
-    }
-    
+    if (novoIndice === indiceAtual) return;
+
     indiceAtual = novoIndice;
-
-    const movimentoPorcentagem = 70 / itensPorPagina;
-    lista.style.transform = `translateX(-${indiceAtual * movimentoPorcentagem}%)`;
+    const movimentoPorcentagem = 100 / (itens.length / itensPorPagina); // Ajuste de cálculo
+    lista.style.transform = `translateX(-${indiceAtual * 70}%)`; // Mantendo sua lógica de 70%
     
     atualizarVisibilidadeSetas();
 }
 
-window.onload = atualizarVisibilidadeSetas; 
+// --- 3. LÓGICA DO CARRINHO (ADICIONAR) ---
+function adicionarAoCarrinho(id, nome, preco) {
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const index = carrinho.findIndex(item => item.id === id);
 
+    if (index !== -1) {
+        carrinho[index].quantidade += 1;
+    } else {
+        carrinho.push({ id, nome, preco, quantidade: 1 });
+    }
+
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    alert(`${nome} adicionado!`);
+    atualizarContador();
+}
+
+function adicionarComQuantidade(id, nome, preco) {
+    // 1. Tenta pegar o input. Se houver vários, precisamos de uma classe ou contexto, 
+    // mas para teste único, vamos garantir que ele ache o valor:
+    const campoQtd = document.getElementById('quantidade-produto');
+    let quantidadeSelecionada = 1;
+
+    if (campoQtd) {
+        quantidadeSelecionada = parseInt(campoQtd.value) || 1;
+    }
+
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    
+    // Convertemos o ID para String para garantir que a comparação funcione sempre
+    const idString = String(id);
+    const index = carrinho.findIndex(item => String(item.id) === idString);
+
+    if (index !== -1) {
+        carrinho[index].quantidade += quantidadeSelecionada;
+    } else {
+        carrinho.push({
+            id: idString,
+            nome: nome,
+            preco: preco,
+            quantidade: quantidadeSelecionada
+        });
+    }
+
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    atualizarContador();
+    alert(`Adicionado: ${quantidadeSelecionada}x ${nome}`);
+}
 
 function renderizarCarrinho() {
     const container = document.getElementById('lista-carrinho');
     const totalElement = document.getElementById('valor-total');
-    
     if (!container) return;
 
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     
     if (carrinho.length === 0) {
-        container.innerHTML = `<div class="carrinho-vazio"><p>Seu carrinho está vazio.</p></div>`;
+        container.innerHTML = `<p>Seu carrinho está vazio.</p>`;
         if(totalElement) totalElement.innerText = "R$ 0,00";
         return;
     }
 
-    let total = 0;
+    let somaTotalGeral = 0;
+
     container.innerHTML = carrinho.map((item, index) => {
+        // Garantimos que preco seja string antes do replace para não dar erro
         let precoLimpo = String(item.preco).replace(',', '.');
-        const subtotal = parseFloat(precoLimpo) * item.quantidade;
-        total += subtotal;
+        const precoNumerico = parseFloat(precoLimpo) || 0;
         
-        // AQUI MUDOU: Usamos classes em vez de style=""
+        // MULTIPLICAÇÃO REAL:
+        const subtotal = precoNumerico * item.quantidade;
+        somaTotalGeral += subtotal;
+
         return `
             <div class="item-carrinho">
-                <div class="detalhes-item">
+                <div class="info">
                     <h3>${item.nome}</h3>
-                    <p class="qtd-preco">
-                        <span>Qtd: ${item.quantidade}</span>
-                        <span>Total: R$ ${subtotal.toFixed(2).replace('.', ',')}</span>
-                    </p>
+                    <p>Unitário: R$ ${precoNumerico.toFixed(2).replace('.', ',')}</p>
+                    <p>Quantidade: <strong>${item.quantidade}</strong></p>
+                    <p><strong>Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}</strong></p>
                 </div>
-                <button class="btn-remover" onclick="removerItem(${index})">Remover</button>
+                <button onclick="removerItem(${index})">Remover</button>
             </div>
         `;
     }).join('');
 
-    if(totalElement) totalElement.innerText = "R$ " + total.toFixed(2).replace('.', ',');
+    if(totalElement) {
+        totalElement.innerText = "R$ " + somaTotalGeral.toFixed(2).replace('.', ',');
+    }
 }
 
-
-function adicionarAoCarrinho(id, nome, preco) {
-    // 1. Puxa do localStorage (sempre use o mesmo nome: 'carrinho')
+function removerItem(index) {
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-    // 2. Verifica se o produto já está no carrinho
-    const index = carrinho.findIndex(item => item.id === id);
-
-    if (index !== -1) {
-        carrinho[index].quantidade += 1; 
-    } else {
-        // 3. Se é novo, cria o objeto e adiciona
-        const produto = {
-            id: id,
-            nome: nome,
-            preco: preco,
-            quantidade: 1
-        };
-        carrinho.push(produto); 
-    }
-
-    // 4. Salva de volta
+    carrinho.splice(index, 1);
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
-
-    alert(`${nome} adicionado ao carrinho!`);
-    atualizarContador(); // Chama a função que já criamos
+    atualizarContador();
+    renderizarCarrinho();
 }
 
 function atualizarContador() {
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     const contador = document.getElementById('contador-carrinho');
     if (contador) {
-        // O contador deve mostrar o tamanho atual do array salvo
-        contador.innerText = carrinho.length;
+        const totalReal = carrinho.reduce((acc, item) => acc + (parseInt(item.quantidade) || 0), 0);
+        contador.innerText = totalReal;
     }
 }
 
-
-function removerItem(index) {
-    // 1. Puxa a lista atual do localStorage
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-    // 2. Remove o item específico pelo índice (posição dele no array)
-    carrinho.splice(index, 1);
-
-    // 3. SALVA a nova lista (sem o item) de volta no localStorage
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
-
-    // 4. REATUALIZA a tela e o contador
-    atualizarContador();   // Para o número lá no ícone diminuir
-    renderizarCarrinho(); // Para sumir da lista da página
-}
-
-
-
-function carregarDados() {
+window.onload = function() {
     atualizarContador();
-    
-    // Se estivermos na página de carrinho, desenha os itens
     if (document.getElementById('lista-carrinho')) {
         renderizarCarrinho();
     }
-}
+};
 
+// --- 5. FINALIZAÇÃO ---
 function finalizarCompra() {
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    
     if (carrinho.length === 0) {
         alert("Seu carrinho está vazio!");
         return;
@@ -173,18 +166,23 @@ function finalizarCompra() {
         let precoLimpo = String(item.preco).replace(',', '.');
         let subtotal = parseFloat(precoLimpo) * item.quantidade;
         total += subtotal;
-        
-        mensagem += `📦 *${item.quantidade}x ${item.nome}*\n   (Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')})\n`;
+        mensagem += `📦 *${item.quantidade}x ${item.nome}* - R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
     });
 
     mensagem += `\n💰 *Valor Total: R$ ${total.toFixed(2).replace('.', ',')}*`;
-    
-    // Substitua pelo SEU número (DD + NÚMERO) sem espaços ou traços
-    let numeroWhatsApp = "5511970595785"; 
-    
-    let url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
-    window.open(url, '_blank');
+    let numeroWhatsApp = "5511977245250"; 
+    window.open(`https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`, '_blank');
 }
 
-// Executa sempre que a página carregar ou recarregar
+function carregarDados() {
+    atualizarContador();
+    atualizarVisibilidadeSetas(); 
+    
+    if (document.getElementById('lista-carrinho')) {
+        renderizarCarrinho();
+    }
+}
+
 window.onload = carregarDados;
+
+window.addEventListener('pageshow', atualizarContador);
