@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
+    <div id="loader-container">
+    <div class="spinner"></div>
+      <p>Carregando produtos...</p>
+    </div>
     <header>
       <h1>Jota - Utensílios e Ferramentas</h1>
       <div class="icone-carrinho">
@@ -58,21 +62,20 @@
         <aside class="categoria">
           <h2>CATEGORIAS</h2>
           <ul>
-            <li>INICIO</li>
-            <li>CONTROLE</li>
-            <li>TRAVA DE SEGURANÇA</li>
-            <li>CADEADO</li>
-            <li>ELETRÔNICOS</li>
-            <li>FITA</li>
-            <li>FERRAMENTAS</li>
-            <li>CABOS</li>
-            <li>FONTES</li>
-            <li>ADAPTADOR DE TOMADA</li>
-            <li>AUTOMOTIVO</li>
-            <li>FONTE</li>
-            <li>ANTENA</li>
-            <li>EXTENSÃO</li>
-            <li>OUTROS</li>
+            <li onclick="filtrarCategoria('TUDO')">INICIO</li>
+            <li onclick="filtrarCategoria('Controles')">CONTROLE</li>
+            <li onclick="filtrarCategoria('Trava de Segurança')">TRAVA DE SEGURANÇA</li>
+            <li onclick="filtrarCategoria('Cadeado')">CADEADO</li>
+            <li onclick="filtrarCategoria('Eletrônicos')">ELETRÔNICOS</li>
+            <li onclick="filtrarCategoria('Fita')">FITA</li>
+            <li onclick="filtrarCategoria('Ferramentas')">FERRAMENTAS</li>
+            <li onclick="filtrarCategoria('Cabos')">CABOS</li>
+            <li onclick="filtrarCategoria('Fontes')">FONTES</li>
+            <li onclick="filtrarCategoria('Adaptador de Tomada')">ADAPTADOR DE TOMADA</li>
+            <li onclick="filtrarCategoria('Automotivo')">AUTOMOTIVO</li>
+            <li onclick="filtrarCategoria('Antenas')">ANTENAS</li>
+            <li onclick="filtrarCategoria('Extensões')">EXTENSÃO</li>
+            <li onclick="filtrarCategoria('Outros')">OUTROS</li>
           </ul>
         </aside>
       </div>
@@ -86,49 +89,46 @@
             <div class="janela-carrossel">
               <div class="lista-produtos">
                 <div class="card-produto">
-                  <li>INICIO</li>
+                  <li onclick="filtrarCategoria('TUDO')">INICIO</li>
                 </div>
                 <div class="card-produto">
-                  <li>CONTROLE</li>
+                  <li onclick="filtrarCategoria('Controles')">CONTROLE</li>
                 </div>
                 <div class="card-produto">
-                  <li>TRAVA DE SEGURANÇA</li>
+                  <li onclick="filtrarCategoria('Trava de Segurança')">TRAVA DE SEGURANÇA</li>
                 </div>
                 <div class="card-produto">
-                  <li>CADEADO</li>
+                  <li onclick="filtrarCategoria('Cadeado')">CADEADO</li>
                 </div>
                 <div class="card-produto">
-                  <li>ELETRÔNICOS</li>
+                  <li onclick="filtrarCategoria('Eletrônicos')">ELETRÔNICOS</li>
                 </div>
                 <div class="card-produto">
-                  <li>FITA</li>
+                  <li onclick="filtrarCategoria('Fita')">FITA</li>
                 </div>
                 <div class="card-produto">
-                  <li>FERRAMENTAS</li>
+                  <li onclick="filtrarCategoria('Ferramentas')">FERRAMENTAS</li>
                 </div>
                 <div class="card-produto">
-                  <li>CABOS</li>
+                  <li onclick="filtrarCategoria('Cabos')">CABOS</li>
                 </div>
                 <div class="card-produto">
-                  <li>FONTES</li>
+                  <li onclick="filtrarCategoria('Fontes')">FONTES</li>
                 </div>
                 <div class="card-produto">
-                  <li>ADAPTADOR DE TOMADA</li>
+                  <li onclick="filtrarCategoria('Adaptador de Tomada')">ADAPTADOR DE TOMADA</li>
                 </div>
                 <div class="card-produto">
-                  <li>AUTOMOTIVO</li>
+                  <li onclick="filtrarCategoria('Automotivo')">AUTOMOTIVO</li>
                 </div>
                 <div class="card-produto">
-                  <li>FONTE</li>
+                  <li onclick="filtrarCategoria('Antenas')">ANTENAS</li>
                 </div>
                 <div class="card-produto">
-                  <li>ANTENA</li>
+                  <li onclick="filtrarCategoria('Extensões')">EXTENSÃO</li>
                 </div>
                 <div class="card-produto">
-                  <li>EXTENSÃO</li>
-                </div>
-                <div class="card-produto">
-                  <li>OUTROS</li>
+                  <li onclick="filtrarCategoria('Outros')">OUTROS</li>
                 </div>
               </div>
             </div>

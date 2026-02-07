@@ -1,6 +1,11 @@
+if (window.location.search.includes('categoria=')) {
+    document.body.classList.add('carregando');
+}
+
+
 // --- 1. CONFIGURAÇÕES GLOBAIS ---
 let indiceAtual = 0;
-const itensPorPagina = 6;
+const itensPorPagina = 4;
 
 // --- 2. FUNÇÕES DO CARROSSEL ---
 function atualizarVisibilidadeSetas() {
@@ -183,6 +188,78 @@ function carregarDados() {
     }
 }
 
-window.onload = carregarDados;
+function filtrarCategoria(nomeCategoria) {
+    // Mostra o loader ao iniciar o filtro
+    document.body.classList.add('carregando');
 
+    const secoes = document.querySelectorAll('.produtos h2');
+    const containers = document.querySelectorAll('.sub-trava-seguranca');
+
+    // Pequeno delay para o usuário ver que está processando (UX)
+    setTimeout(() => {
+        secoes.forEach((titulo, index) => {
+            const containerCorrespondente = containers[index];
+            const eAlvo = (nomeCategoria.toUpperCase() === 'TUDO' || 
+                          titulo.innerText.trim().toUpperCase() === nomeCategoria.toUpperCase());
+
+            if (eAlvo) {
+                titulo.style.display = 'block';
+                containerCorrespondente.style.display = 'grid';
+            } else {
+                titulo.style.display = 'none';
+                containerCorrespondente.style.display = 'none';
+            }
+        });
+
+        // FILTRO CONCLUÍDO: Esconde o loader
+        document.body.classList.remove('carregando');
+    }, 400); // 400ms é o tempo perfeito para ser percebido sem irritar
+}
+
+
+function IrParaHomeEFiltrar(categoria) {
+    document.body.classList.add('carregando');
+    // Verifica se o usuário já está na página principal (index ou "/")
+    const naHome = window.location.pathname === "/" || window.location.pathname.includes("index");
+
+    if (naHome) {
+        // Se já está na home, apenas filtra sem recarregar a página ou mudar a URL
+        filtrarCategoria(categoria);
+        
+        // Opcional: Limpa a URL visualmente para não ficar com o ?categoria= antigo
+        window.history.replaceState({}, '', window.location.pathname);
+    } else {
+        // Se estiver na página de produto, aí sim redireciona
+        window.location.href = `/?categoria=${encodeURIComponent(categoria)}`;
+    }
+}
+
+// 1. Remova as linhas soltas de window.onload e carregarDados e use isto:
+window.addEventListener('load', function() {
+    // Roda sua função de carregar dados do banco/JSON
+    if (typeof carregarDados === "function") {
+        carregarDados();
+    }
+
+    // Atualiza o ícone do carrinho
+    atualizarContador();
+
+    // Se estiver na página do carrinho, renderiza
+    if (document.getElementById('lista-carrinho')) {
+        renderizarCarrinho();
+    }
+
+    // Lógica do Filtro via URL (vindo de outra página)
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoriaFiltro = urlParams.get('categoria');
+
+    if (categoriaFiltro) {
+        // Um tempo maior (300ms) para dar tempo de carregar os produtos do banco
+        setTimeout(() => {
+            filtrarCategoria(categoriaFiltro);
+        }, 300);
+    }
+});
+
+// Mantém esta linha para garantir o contador ao voltar
 window.addEventListener('pageshow', atualizarContador);
